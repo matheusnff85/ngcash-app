@@ -1,0 +1,7 @@
+**/coverage
+**/node_modules*
+**/*.log
+**/build*
+front.eval
+back.eval
+.vscode*
