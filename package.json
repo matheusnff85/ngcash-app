@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "camelcase": "^7.0.0",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "puppeteer": "^19.2.2",
+    "uuid": "^9.0.0"
+  }
+}
