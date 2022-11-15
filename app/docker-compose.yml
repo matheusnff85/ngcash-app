@@ -1,6 +1,7 @@
 version: '3.0'
 services:
   frontend:
+    container_name: app_frontend
     build: ./frontend
     ports:
       - 3000:3000
