@@ -14,6 +14,11 @@ export default class UsersModel {
     return result;
   }
 
+  public async findByUsername(username: string): Promise<IUser | null> {
+    const result = await this._usersModel.findOne({ where: { username } });
+    return result;
+  }
+
   public async create(newUser: IUser): Promise<IUser> {
     const result = await this._usersModel.create(newUser);
     return result;

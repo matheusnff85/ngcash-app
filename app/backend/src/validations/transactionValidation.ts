@@ -19,7 +19,7 @@ const validateTransaction = async (newTransaction: ITransaction): Promise<void> 
   }
 
   const { error } = transactionSchema.validate(newTransaction);
-  if (error) throw new CustomError(StatusCodes.BAD_REQUEST, 'All fields must be filled.');
+  if (error) throw new CustomError(StatusCodes.BAD_REQUEST, error.message);
 
   const debitedAccount = await accountsModel.findOne(`${debitedAccountId}`);
   const creditedAccount = await accountsModel.findOne(`${creditedAccountId}`);
