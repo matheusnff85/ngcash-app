@@ -13,4 +13,18 @@ export default class AccountsModel {
     const result = await this._accountsModel.findOne({ where: { id } });
     return result;
   }
+
+  public async create(newAccount: IAccount): Promise<IAccount> {
+    const result = await this._accountsModel.create(newAccount);
+    return result;
+  }
+
+  public async update(newInfos: IAccount): Promise<any> {
+    const { balance, id } = newInfos;
+    const result = await this._accountsModel.update(
+      { balance },
+      { where: { id } },
+    );
+    return result;
+  }
 }

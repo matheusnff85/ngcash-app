@@ -13,4 +13,18 @@ export default class TransactionsModel {
     const result = await this._transactionsModel.findOne({ where: { id } });
     return result;
   }
+
+  public async create(newTransaction: ITransaction): Promise<ITransaction> {
+    const result = await this._transactionsModel.create(newTransaction);
+    return result;
+  }
+
+  public async update(newInfos: ITransaction): Promise<any> {
+    const { debitedAccountId, creditedAccountId, value, id } = newInfos;
+    const result = await this._transactionsModel.update(
+      { debitedAccountId, creditedAccountId, value },
+      { where: { id } },
+    );
+    return result;
+  }
 }
