@@ -27,7 +27,7 @@ export default class UserController {
   public login: RequestHandler = async (req, res, next) => {
     try {
       const result = await this.userServices.login(req.body);
-      return res.status(StatusCodes.OK).json({ token: result });
+      return res.status(StatusCodes.OK).json(result);
     } catch (error) {
       next(error);
     }

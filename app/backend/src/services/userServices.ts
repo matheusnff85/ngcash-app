@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import CustomError from '../types/customError';
 import StatusCodes from '../types/statusCodes';
-import { IUser } from '../interfaces/UserInterface';
+import { IUser, ILogin } from '../interfaces/UserInterface';
 import UsersModel from '../models/UsersModel';
 import { userSchema, validateNewUser } from '../validations/userValidation';
 import generateToken from '../utils/generateToken';
@@ -20,14 +20,15 @@ export default class UserServices {
     return result;
   }
 
-  public async login(loginObj: IUser): Promise<string> {
+  public async login(loginObj: IUser): Promise<ILogin> {
     const { username, password } = loginObj;
     const result = await this.usersModel.findByUsername(username);
     if (!result) throw new CustomError(StatusCodes.UNAUTHORIZED, 'incorrect username');
     const validatePass = await bcrypt.compare(password, result.password);
     if (!validatePass) throw new CustomError(StatusCodes.UNAUTHORIZED, 'incorrect password');
+    const { id, accountId } = result;
     const token = generateToken(username);
-    return token;
+    return { id, username, accountId, token };
   }
 
   public async create(newUser: IUser): Promise<IUser> {

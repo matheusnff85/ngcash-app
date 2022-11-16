@@ -5,7 +5,7 @@ import StatusCodes from '../types/statusCodes';
 import UsersModel from '../models/UsersModel';
 
 const userSchema = Joi.object({
-  id: Joi.number().required(),
+  id: Joi.number(),
   username: Joi.string().min(3).required(),
   password: Joi.string().regex(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&.]{8}/).required(),
 });
