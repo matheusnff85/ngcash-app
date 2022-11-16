@@ -45,9 +45,9 @@ export default class UserController {
   public update: RequestHandler = async (req, res, next) => {
     try {
       const userObj: IUser = req.body;
-      userObj.id = req.params.id;
+      userObj.id = Number(req.params.id);
       const result = await this.userServices.update(userObj);
-      return result;
+      return res.status(StatusCodes.OK).json({ message: result });
     } catch (error) {
       next(error);
     }

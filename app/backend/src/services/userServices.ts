@@ -36,10 +36,11 @@ export default class UserServices {
     return result;
   }
 
-  public async update(newInfos: IUser): Promise<any> {
+  public async update(newInfos: IUser): Promise<string> {
     const { error } = userSchema.validate(newInfos);
     if (error) throw new CustomError(StatusCodes.BAD_REQUEST, error.message);
-    const result = await this.update(newInfos);
-    return result;
+    const result = await this.usersModel.update(newInfos);
+    if (result[0] === 0) throw new CustomError(StatusCodes.NOT_FOUND, 'User not found.');
+    return 'User updated.';
   }
 }

@@ -20,7 +20,7 @@ Users.init({
     type: STRING,
     allowNull: false,
   },
-  passoword: {
+  password: {
     type: STRING,
     allowNull: false,
   },

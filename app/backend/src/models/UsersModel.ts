@@ -1,5 +1,9 @@
+import * as bcrypt from 'bcryptjs';
 import Users from '../database/models/Users';
+import AccountsModel from './AccountsModel';
 import { IUser } from '../interfaces/UserInterface';
+
+const accountsModel = new AccountsModel();
 
 export default class UsersModel {
   private _usersModel = Users;
@@ -20,14 +24,18 @@ export default class UsersModel {
   }
 
   public async create(newUser: IUser): Promise<IUser> {
-    const result = await this._usersModel.create(newUser);
+    const hashedPass = await bcrypt.hash(newUser.password, 10);
+    const { id } = await accountsModel.create({ balance: 100 });
+    const newUserObj = { username: newUser.username, accountId: id, password: hashedPass };
+    const result = await this._usersModel.create(newUserObj);
     return result;
   }
 
   public async update(newInfos: IUser): Promise<any> {
-    const { username, password, id } = newInfos;
+    const hashedPass = await bcrypt.hash(newInfos.password, 10);
+    const { username, id } = newInfos;
     const result = await this._usersModel.update(
-      { username, password },
+      { username, password: hashedPass },
       { where: { id } },
     );
     return result;

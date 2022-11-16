@@ -1,5 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors';
+import errorHandler from '../middlewares/errorHandler';
+import userRouter from '../routes/user.routes';
 
 export default class App {
   public app: express.Express;
@@ -8,6 +10,7 @@ export default class App {
     this.app = express();
 
     this.config();
+    this.app.get('/', (req, res) => res.json({ ok: true }));
   }
 
   private config():void {
@@ -21,6 +24,8 @@ export default class App {
     this.app.use(express.json());
     this.app.use(cors());
     this.app.use(accessControl);
+    this.app.use(userRouter);
+    this.app.use(errorHandler);
   }
 
   public start(PORT: string | number):void {
