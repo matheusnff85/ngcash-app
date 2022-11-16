@@ -40,7 +40,7 @@ export default class UserServices {
     const { error } = userSchema.validate(newInfos);
     if (error) throw new CustomError(StatusCodes.BAD_REQUEST, error.message);
     const result = await this.usersModel.update(newInfos);
-    if (result[0] === 0) throw new CustomError(StatusCodes.NOT_FOUND, 'User not found.');
+    if (result === 0) throw new CustomError(StatusCodes.NOT_FOUND, 'User not found.');
     return 'User updated.';
   }
 }

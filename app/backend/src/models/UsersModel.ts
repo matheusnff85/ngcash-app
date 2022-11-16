@@ -31,13 +31,13 @@ export default class UsersModel {
     return result;
   }
 
-  public async update(newInfos: IUser): Promise<any> {
+  public async update(newInfos: IUser): Promise<number> {
     const hashedPass = await bcrypt.hash(newInfos.password, 10);
     const { username, id } = newInfos;
     const result = await this._usersModel.update(
       { username, password: hashedPass },
       { where: { id } },
     );
-    return result;
+    return result[0];
   }
 }
