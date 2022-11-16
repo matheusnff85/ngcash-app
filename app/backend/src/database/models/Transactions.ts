@@ -7,7 +7,7 @@ class Transactions extends Model {
   debitedAccountId!: number;
   creditedAccountId!: number;
   value!: number;
-  createdAt!: string;
+  createdAt!: Date;
 }
 
 Transactions.init({
