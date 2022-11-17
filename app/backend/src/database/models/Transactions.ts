@@ -20,10 +20,12 @@ Transactions.init({
   debitedAccountId: {
     type: INTEGER,
     allowNull: false,
+    field: 'debited_account_id',
   },
   creditedAccountId: {
     type: INTEGER,
     allowNull: false,
+    field: 'credited_account_id',
   },
   value: {
     type: DECIMAL,
@@ -32,6 +34,7 @@ Transactions.init({
   createdAt: {
     type: DATE,
     allowNull: false,
+    field: 'created_at',
   },
 }, {
   sequelize: db,

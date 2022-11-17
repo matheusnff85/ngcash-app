@@ -19,12 +19,12 @@ export default class TransactionsModel {
     return result;
   }
 
-  public async update(newInfos: ITransaction): Promise<any> {
+  public async update(newInfos: ITransaction): Promise<number> {
     const { debitedAccountId, creditedAccountId, value, id } = newInfos;
     const result = await this._transactionsModel.update(
       { debitedAccountId, creditedAccountId, value },
       { where: { id } },
     );
-    return result;
+    return result[0];
   }
 }

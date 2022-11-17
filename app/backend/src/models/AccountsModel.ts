@@ -15,16 +15,17 @@ export default class AccountsModel {
   }
 
   public async create(newAccount: IAccount): Promise<IAccount> {
-    const result = await this._accountsModel.create(newAccount);
+    const { balance } = newAccount;
+    const result = await this._accountsModel.create(Number(balance));
     return result;
   }
 
-  public async update(newInfos: IAccount): Promise<any> {
+  public async update(newInfos: IAccount): Promise<number> {
     const { balance, id } = newInfos;
     const result = await this._accountsModel.update(
       { balance },
       { where: { id } },
     );
-    return result;
+    return result[0];
   }
 }
