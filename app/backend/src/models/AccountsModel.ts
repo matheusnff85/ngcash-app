@@ -16,7 +16,7 @@ export default class AccountsModel {
 
   public async create(newAccount: IAccount): Promise<IAccount> {
     const { balance } = newAccount;
-    const result = await this._accountsModel.create(Number(balance));
+    const result = await this._accountsModel.create({ balance });
     return result;
   }
 
