@@ -35,6 +35,6 @@ Users.init({
   timestamps: false,
 });
 
-Users.belongsTo(Accounts, { foreignKey: 'accountId' });
+Users.belongsTo(Accounts, { foreignKey: 'accountId', as: 'userBalance' });
 
 export default Users;

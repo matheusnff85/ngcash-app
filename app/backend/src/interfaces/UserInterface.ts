@@ -4,6 +4,9 @@ export interface IUser {
   password: string;
   accountId?: number;
   token?: string;
+  userBalance?: {
+    balance: number,
+  }
 }
 
 export interface ILogin {
@@ -11,4 +14,7 @@ export interface ILogin {
   username: string;
   accountId?: number;
   token: string;
+  userBalance?: {
+    balance: number,
+  }
 }

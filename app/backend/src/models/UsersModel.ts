@@ -2,6 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import Users from '../database/models/Users';
 import AccountsModel from './AccountsModel';
 import { IUser } from '../interfaces/UserInterface';
+import Accounts from '../database/models/Accounts';
 
 const accountsModel = new AccountsModel();
 
@@ -9,17 +10,33 @@ export default class UsersModel {
   private _usersModel = Users;
 
   public async findAll(): Promise<IUser[]> {
-    const result = await this._usersModel.findAll();
+    const result = await this._usersModel.findAll({
+      include: [
+        { model: Accounts, as: 'userBalance', attributes: ['balance'] },
+      ],
+      attributes: { exclude: ['password'] },
+    });
     return result;
   }
 
   public async findOne(id: string): Promise<IUser | null> {
-    const result = await this._usersModel.findOne({ where: { id } });
+    const result = await this._usersModel.findOne({
+      include: [
+        { model: Accounts, as: 'userBalance', attributes: ['balance'] },
+      ],
+      attributes: { exclude: ['password'] },
+      where: { id },
+    });
     return result;
   }
 
   public async findByUsername(username: string): Promise<IUser | null> {
-    const result = await this._usersModel.findOne({ where: { username } });
+    const result = await this._usersModel.findOne({
+      where: { username },
+      include: [
+        { model: Accounts, as: 'userBalance', attributes: ['balance'] },
+      ],
+    });
     return result;
   }
 

@@ -26,9 +26,9 @@ export default class UserServices {
     if (!result) throw new CustomError(StatusCodes.UNAUTHORIZED, 'incorrect username');
     const validatePass = await bcrypt.compare(password, result.password);
     if (!validatePass) throw new CustomError(StatusCodes.UNAUTHORIZED, 'incorrect password');
-    const { id, accountId } = result;
+    const { id, accountId, userBalance } = result;
     const token = generateToken(username);
-    return { id, username, accountId, token };
+    return { id, username, accountId, userBalance, token };
   }
 
   public async create(newUser: IUser): Promise<IUser> {
