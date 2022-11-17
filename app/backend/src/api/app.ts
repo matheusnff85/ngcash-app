@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import errorHandler from '../middlewares/errorHandler';
 import userRouter from '../routes/user.routes';
 import accountRouter from '../routes/account.routes';
+import transactionRouter from '../routes/transaction.routes';
 
 export default class App {
   public app: express.Express;
@@ -27,6 +28,7 @@ export default class App {
     this.app.use(accessControl);
     this.app.use(userRouter);
     this.app.use(accountRouter);
+    this.app.use(transactionRouter);
     this.app.use(errorHandler);
   }
 

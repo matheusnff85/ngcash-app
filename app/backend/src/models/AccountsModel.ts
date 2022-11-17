@@ -28,4 +28,10 @@ export default class AccountsModel {
     );
     return result[0];
   }
+
+  public async updateBalance(newInfos: IAccount): Promise<IAccount> {
+    const { balance, id } = newInfos;
+    const result = await this._accountsModel.increment('balance', { by: balance, where: { id } });
+    return result;
+  }
 }

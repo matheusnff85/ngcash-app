@@ -7,7 +7,8 @@ import AccountsModel from '../models/AccountsModel';
 const transactionSchema = Joi.object({
   debitedAccountId: Joi.number().integer().required(),
   creditedAccountId: Joi.number().integer().required(),
-  value: Joi.number().required(),
+  value: Joi.number().min(1).required(),
+  createdAt: Joi.string(),
 });
 
 const accountsModel = new AccountsModel();

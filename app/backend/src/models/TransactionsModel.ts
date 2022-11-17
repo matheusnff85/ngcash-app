@@ -1,5 +1,8 @@
 import Transactions from '../database/models/Transactions';
 import { ITransaction } from '../interfaces/TransactionInterface';
+import AccountsModel from './AccountsModel';
+
+const accountsModel = new AccountsModel();
 
 export default class TransactionsModel {
   private _transactionsModel = Transactions;
@@ -15,6 +18,9 @@ export default class TransactionsModel {
   }
 
   public async create(newTransaction: ITransaction): Promise<ITransaction> {
+    const { creditedAccountId, debitedAccountId, value } = newTransaction;
+    await accountsModel.updateBalance({ balance: value, id: creditedAccountId });
+    await accountsModel.updateBalance({ balance: value * -1, id: debitedAccountId });
     const result = await this._transactionsModel.create(newTransaction);
     return result;
   }
