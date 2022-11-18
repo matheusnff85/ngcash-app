@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import { ILogin } from '../interfaces/loginInterface';
 
 class Register extends React.Component<any, any> {
   constructor(props: any) {
@@ -6,6 +8,7 @@ class Register extends React.Component<any, any> {
     this.state = {
       username: '',
       password: '',
+      responseMessage: '',
     }
   }
 
@@ -18,8 +21,28 @@ class Register extends React.Component<any, any> {
     });
   };
 
-  render() {
+  buttonStatus = () => {
     const { username, password } = this.state;
+
+    const regex = /(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&.]{8}/;
+    return (username.length >= 3) && (password.match(regex));
+  };
+
+  register = async (userObj: ILogin) => {
+    const result = await axios.post('http://localhost:3001/users', userObj)
+    .then((res) => res.data)
+    .catch((err) => {
+      this.setState({ responseMessage: err.response.data.message });
+    });
+    if (result) {
+      this.setState({ responseMessage: 'Registrado com sucesso' });
+      window.location.replace('/login');
+    }
+  }
+
+  render() {
+    const checkButtonStatus = this.buttonStatus();
+    const { username, password, responseMessage } = this.state;
     return(
       <main>
         <h2>Register Page</h2>
@@ -48,9 +71,14 @@ class Register extends React.Component<any, any> {
             <li>1 Número</li>
           </ul>
         </div>
-        <button>
+        <button
+          disabled={ !checkButtonStatus }
+          onClick={ () => this.register({ username, password }) }
+        >
           Registrar-se
         </button>
+
+        { responseMessage && <h2>{ responseMessage }</h2>}
       </main>
     )
   }

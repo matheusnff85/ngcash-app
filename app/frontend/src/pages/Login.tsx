@@ -29,8 +29,8 @@ class Login extends React.Component<any, any> {
     .catch((err) => {
       this.setState({ loginErrorMsg: err.response.data.message });
     });
-    console.log(result);
     if (result) {
+      localStorage.setItem('user', JSON.stringify(result));
       window.location.replace('/dashboard');
     }
   };
