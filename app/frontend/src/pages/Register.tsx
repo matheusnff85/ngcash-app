@@ -30,10 +30,10 @@ class Register extends React.Component<any, any> {
 
   register = async (userObj: ILogin) => {
     const result = await axios.post('http://localhost:3001/users', userObj)
-    .then((res) => res.data)
-    .catch((err) => {
-      this.setState({ responseMessage: err.response.data.message });
-    });
+      .then((res) => res.data)
+      .catch((err) => {
+        this.setState({ responseMessage: err.response.data.message });
+      });
     if (result) {
       this.setState({ responseMessage: 'Registrado com sucesso' });
       window.location.replace('/login');
@@ -57,7 +57,7 @@ class Register extends React.Component<any, any> {
           <li>O usuário precisa ter no mínimo 3 caracteres</li>
         </ul>
         <input
-          type="text"
+          type="password"
           name="password"
           placeholder="senha"
           value={ password }

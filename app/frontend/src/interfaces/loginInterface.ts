@@ -4,11 +4,12 @@ export interface ILogin {
 }
 
 export interface IUserLoginInfos {
+  id: number,
   username: string,
   password: string,
   token: string,
   accountId: number,
-  accountBalance: {
+  userBalance: {
     balance: number,
   }
 }
