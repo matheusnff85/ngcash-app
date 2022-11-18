@@ -29,4 +29,9 @@ export default class TransactionServices {
     if (result === 0) throw new CustomError(StatusCodes.NOT_FOUND, 'Transaction not found.');
     return 'Transaction updated.';
   }
+
+  public async findUserTransactions(id: string): Promise<ITransaction[]> {
+    const result = await this.transactionModel.findUserTransactions(id);
+    return result;
+  }
 }

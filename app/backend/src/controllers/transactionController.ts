@@ -9,7 +9,6 @@ export default class TransactionController {
   public findAll: RequestHandler = async (_req, res, next) => {
     try {
       const result = await this.transactionServices.findAll();
-      console.log(new Date());
       return res.status(StatusCodes.OK).json(result);
     } catch (error) {
       next(error);
@@ -40,6 +39,16 @@ export default class TransactionController {
       transactionObj.id = Number(req.params.id);
       const result = await this.transactionServices.update(transactionObj);
       return res.status(StatusCodes.OK).json({ message: result });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public findUserTransactions: RequestHandler = async (req, res, next) => {
+    try {
+      console.log(req.params);
+      const result = await this.transactionServices.findUserTransactions(req.params.id);
+      res.status(StatusCodes.OK).json(result);
     } catch (error) {
       next(error);
     }

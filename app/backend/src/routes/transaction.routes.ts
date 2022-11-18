@@ -9,5 +9,7 @@ transactionRouter.get('/transaction', validateToken, transactionController.findA
 transactionRouter.get('/transaction/:id', validateToken, transactionController.findOne);
 transactionRouter.post('/transaction', validateToken, transactionController.create);
 transactionRouter.patch('/transaction/:id', transactionController.update);
+transactionRouter
+  .get('/transaction/user/:id', validateToken, transactionController.findUserTransactions);
 
 export default transactionRouter;

@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Transactions from '../database/models/Transactions';
 import { ITransaction } from '../interfaces/TransactionInterface';
 import AccountsModel from './AccountsModel';
@@ -32,5 +33,14 @@ export default class TransactionsModel {
       { where: { id } },
     );
     return result[0];
+  }
+
+  public async findUserTransactions(id: string): Promise<ITransaction[]> {
+    const result = await this._transactionsModel.findAll({
+      where: {
+        [Op.or]: [{ creditedAccountId: id }, { debitedAccountId: id }],
+      },
+    });
+    return result;
   }
 }
