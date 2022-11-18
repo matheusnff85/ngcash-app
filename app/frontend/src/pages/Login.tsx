@@ -24,7 +24,6 @@ class Login extends React.Component<any, any> {
   };
 
   login = async (loginObj: ILogin) => {
-    // const { history } = this.props;
     const result = await axios.post('http://localhost:3001/login', loginObj)
     .then((res) => res.data)
     .catch((err) => {
@@ -40,8 +39,8 @@ class Login extends React.Component<any, any> {
     const { username, password, loginErrorMsg } = this.state;
     return (
       <main>
-        <h2>Login Page</h2>
-        <h2>{ loginErrorMsg }</h2>
+        <h2>NG.CASH</h2>
+        <p>O app financeiro da <strong>N</strong>ova <strong>G</strong>eração!</p>
         <input
           type="text"
           name="username"
@@ -56,12 +55,17 @@ class Login extends React.Component<any, any> {
           value={ password }
           onChange={ this.handleChange }
         />
-
-          <button onClick={ () => this.login({ username, password }) } >Login</button>
-
+        <button 
+          onClick={ () => this.login({ username, password }) } 
+        >
+          Login
+        </button>
+        <h4>Não possui conta?</h4>
         <Link to="/register" >
-          <button>Cadastrar-se</button>
+          <button>Criar Conta</button>
         </Link>
+
+        { loginErrorMsg && <h2>{ loginErrorMsg }</h2>}
       </main>
     );
   }
