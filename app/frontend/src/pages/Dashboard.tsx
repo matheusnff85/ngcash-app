@@ -53,21 +53,47 @@ class Dashboard extends React.Component<any, any> {
     }
   }
 
+  getUserIdByUsername = async (username: string) => {
+    const { token } = this.state;
+    const result = await axios.get('http://localhost:3001/users/0', {
+      headers: { Authorization: token },
+      params: { username } })
+      .then((res) => res.data)
+      .catch((err) => console.error(err));
+    return result.id;
+  }
+
   payButtonStatus = () => {
-    const { userBalance, amountToTransfer, userToTransfer } = this.state;
-    return Number(amountToTransfer) > userBalance || Number(amountToTransfer) <= 0 || userToTransfer === '';
+    const { userBalance, amountToTransfer, userToTransfer, username } = this.state;
+    return Number(amountToTransfer) > userBalance 
+      || Number(amountToTransfer) <= 0 
+      || userToTransfer === ''
+      || username === userToTransfer;
   }
 
   newTransaction = async () => {
-    const { userToTransfer } = this.state;
-    const getUserId = await axios.get('http://localhost:3001/users', {
-      params: { username: userToTransfer } })
+    const { userToTransfer, userId, amountToTransfer, token, userBalance } = this.state;
+    const getUserId = await this.getUserIdByUsername(userToTransfer);
+    const transactionObj = {
+      debitedAccountId: getUserId,
+      creditedAccountId: userId,
+      value: Number(amountToTransfer),
+      createdAt: new Date().toISOString(),
+    }
+    const newTransaction = await axios.post('http://localhost:3001/transaction', transactionObj, {
+      headers: { Authorization: token } })
       .then((res) => res.data)
       .catch((err) => console.error(err));
-    console.log(getUserId);
+    if (newTransaction) {
+      this.setState({ userBalance: userBalance - Number(amountToTransfer)});
+    }
   }
 
-    // criar uma transferencia, component de table, trocar o retorno do backend do id dos envolvidos para o username
+  // criar uma transferencia - OK
+  // botão de logout
+  // component de table
+  // trocar o retorno do backend do id dos envolvidos para o username
+  // remover log do backend
 
   render() {
     const checkButtonStatus = this.payButtonStatus();

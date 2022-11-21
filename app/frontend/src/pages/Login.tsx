@@ -24,6 +24,7 @@ class Login extends React.Component<any, any> {
   }
 
   login = async (loginObj: ILogin) => {
+    localStorage.removeItem('user');
     const result = await axios.post('http://localhost:3001/login', loginObj)
     .then((res) => res.data)
     .catch((err) => {
