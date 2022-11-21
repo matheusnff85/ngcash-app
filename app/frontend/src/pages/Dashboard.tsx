@@ -92,6 +92,7 @@ class Dashboard extends React.Component<any, any> {
         userToTransfer: '',
       });
       window.alert('Transação realizada com sucesso!');
+      window.location.reload();
     }
   }
 

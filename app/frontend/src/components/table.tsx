@@ -35,13 +35,33 @@ export default class Table extends React.Component<any, any> {
 
   filterByDate = (date: string) => {
     const { transactions } = this.props;
-    const filtered = transactions.filter((item: ITransaction) => {
-      const convertItemDate = new Date(item.createdAt).toLocaleDateString();
-      const convertFilterDate = new Date(`${date} 00:00:00`).toLocaleDateString();
-      return convertItemDate === convertFilterDate;
-    });
+    const { transactionsFilter } = this.state;
+    const filtered = (transactionsFilter.length > 0 ? transactionsFilter : transactions)
+      .filter((item: ITransaction) => {
+        const convertItemDate = new Date(item.createdAt).toLocaleDateString();
+        const convertFilterDate = new Date(`${date} 00:00:00`).toLocaleDateString();
+        return convertItemDate === convertFilterDate;
+      });
     this.setState({ transactionsFilter: filtered });
   }
+
+  filterByType = (type: string) => {
+    const { transactionsFilter } = this.state;
+    const { userId, transactions } = this.props;
+    if(type === 'cashIn') {
+      const filtered = (transactionsFilter.length > 0 ? transactionsFilter : transactions)
+        .filter((item: ITransaction) => item.creditedAccountId === userId);
+      this.setState({ transactionsFilter: filtered });
+    } 
+    if (type === 'cashOut') {
+      const filtered = (transactionsFilter.length > 0 ? transactionsFilter : transactions)
+        .filter((item: ITransaction) => item.debitedAccountId === userId);
+      this.setState({ transactionsFilter: filtered });
+    }
+    if (type === 'all') {
+      this.setState({ transactionsFilter: transactions });
+    }
+  };
 
   render(): React.ReactNode {
     const { transactionsFilter } = this.state;
@@ -49,12 +69,15 @@ export default class Table extends React.Component<any, any> {
     return (
       <div>
         <div>
-          <select name="transactionType" id="transactionType">
-            <option value="all" defaultChecked>Todas</option>
-            <option value="cashIn">Cash-In</option>
-            <option value="cashOut">Cash-Out</option>
+          <select 
+            name="transactionType" 
+            id="transactionType" 
+            onChange={ ({ target }) => this.filterByType(target.value)}
+          >
+            <option value="all" defaultChecked >Todas</option>
+            <option value="cashIn" >Cash-In</option>
+            <option value="cashOut" >Cash-Out</option>
           </select>
-          <button>Filtrar</button>
           <button onClick={ () => this.orderByReleaseDate('DSC') }>Recentes</button>
           <button onClick={ () => this.orderByReleaseDate('ASC') }>Antigas</button>
           <input type="date" name="filterDate" id="filterDate" onChange={ ({ target }) => this.filterByDate(target.value) } />
