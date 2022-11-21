@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { IUserLoginInfos } from '../interfaces/loginInterface';
 import Table from '../components/table';
-import { ITransaction } from '../interfaces/transactionInterface';
 
 class Dashboard extends React.Component<any, any> {
   constructor(props: any) {
