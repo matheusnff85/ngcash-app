@@ -89,11 +89,16 @@ class Dashboard extends React.Component<any, any> {
     }
   }
 
+  logOut = () => {
+    localStorage.removeItem('user');
+    window.location.replace('/');
+  }
+
   // criar uma transferencia - OK
   // botão de logout
   // component de table
   // trocar o retorno do backend do id dos envolvidos para o username
-  // remover log do backend
+  // remover log do backend - ok
 
   render() {
     const checkButtonStatus = this.payButtonStatus();
@@ -107,7 +112,11 @@ class Dashboard extends React.Component<any, any> {
           <div>
             <h3>{ username }</h3>
             <h3>{ userBalance }</h3>
-            <button>Log-out</button>
+            <button
+              onClick={ this.logOut }
+            >
+              Log-out
+            </button>
           </div>
         </header>
         <div>
