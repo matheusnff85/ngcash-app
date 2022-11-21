@@ -36,6 +36,7 @@ export default class UsersModel {
       include: [
         { model: Accounts, as: 'userBalance', attributes: ['balance'] },
       ],
+      attributes: { exclude: ['password'] },
     });
     return result;
   }

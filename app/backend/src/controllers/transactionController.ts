@@ -46,7 +46,6 @@ export default class TransactionController {
 
   public findUserTransactions: RequestHandler = async (req, res, next) => {
     try {
-      console.log(req.params);
       const result = await this.transactionServices.findUserTransactions(req.params.id);
       res.status(StatusCodes.OK).json(result);
     } catch (error) {
