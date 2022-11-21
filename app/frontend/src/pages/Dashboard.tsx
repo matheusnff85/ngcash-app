@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { IUserLoginInfos } from '../interfaces/loginInterface';
 import Table from '../components/table';
+import { ITransaction } from '../interfaces/transactionInterface';
 
 class Dashboard extends React.Component<any, any> {
   constructor(props: any) {
@@ -99,7 +100,7 @@ class Dashboard extends React.Component<any, any> {
     window.location.replace('/');
   }
 
-  render() {
+  render(): React.ReactNode {
     const checkButtonStatus = this.payButtonStatus();
     const { username, userBalance, userTransactions, userId, userToTransfer, amountToTransfer } = this.state;
     return(
@@ -141,7 +142,10 @@ class Dashboard extends React.Component<any, any> {
             Transferir
           </button>
         </div>
-        <Table transactions={ userTransactions } userId={ userId } />
+        <Table
+          transactions={ userTransactions }
+          userId={ userId }
+          />
       </main>
     )
   }

@@ -36,7 +36,7 @@ class Login extends React.Component<any, any> {
     }
   }
 
-  render() {
+  render(): React.ReactNode {
     const { username, password, loginErrorMsg } = this.state;
     return (
       <main>
