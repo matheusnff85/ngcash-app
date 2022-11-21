@@ -19,14 +19,14 @@ class Register extends React.Component<any, any> {
     this.setState({
       [name]: value,
     });
-  };
+  }
 
   buttonStatus = () => {
     const { username, password } = this.state;
 
     const regex = /(?=.*[A-Z])(?=.*\d)[A-Za-z\d$@$!%*?&.]{8}/;
     return (username.length >= 3) && (password.match(regex));
-  };
+  }
 
   register = async (userObj: ILogin) => {
     const result = await axios.post('http://localhost:3001/users', userObj)

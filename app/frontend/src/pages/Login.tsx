@@ -21,7 +21,7 @@ class Login extends React.Component<any, any> {
     this.setState({
       [name]: value,
     });
-  };
+  }
 
   login = async (loginObj: ILogin) => {
     const result = await axios.post('http://localhost:3001/login', loginObj)
@@ -33,7 +33,7 @@ class Login extends React.Component<any, any> {
       localStorage.setItem('user', JSON.stringify(result));
       window.location.replace('/dashboard');
     }
-  };
+  }
 
   render() {
     const { username, password, loginErrorMsg } = this.state;

@@ -11,6 +11,9 @@ class Dashboard extends React.Component<any, any> {
       token: '',
       userBalance: '',
       username: '',
+      userTransactions: [],
+      userToTransfer: '',
+      amountToTransfer: '',
     }
   }
 
@@ -31,25 +34,77 @@ class Dashboard extends React.Component<any, any> {
     }
   }
 
+  handleChange = ({ target }: any) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
   getTransactions = async (id: number, token: string) => {
     const result = await axios
       .get(`http://localhost:3001/transaction/user/${id}`, { headers: { Authorization: token }})
         .then((res) => res.data)
         .catch((err) => console.error(err));
-    console.log(result);
+    if (result) {
+      this.setState({ userTransactions: result });
+    }
   }
 
+  payButtonStatus = () => {
+    const { userBalance, amountToTransfer, userToTransfer } = this.state;
+    return Number(amountToTransfer) > userBalance || Number(amountToTransfer) <= 0 || userToTransfer === '';
+  }
+
+  newTransaction = async () => {
+    const { userToTransfer } = this.state;
+    const getUserId = await axios.get('http://localhost:3001/users', {
+      params: { username: userToTransfer } })
+      .then((res) => res.data)
+      .catch((err) => console.error(err));
+    console.log(getUserId);
+  }
+
+    // criar uma transferencia, component de table, trocar o retorno do backend do id dos envolvidos para o username
+
   render() {
+    const checkButtonStatus = this.payButtonStatus();
+    const { username, userBalance } = this.state;
     return(
       <main>
-        <h2>Dashboard Page</h2>
+        <header>
+          <div>
+            <h2>NG.CASH</h2>
+          </div>
+          <div>
+            <h3>{ username }</h3>
+            <h3>{ userBalance }</h3>
+            <button>Log-out</button>
+          </div>
+        </header>
         <div>
-          <h2>Informe o nome do usuário para quem deseja transferir e a quantia</h2>
-          <input type="text" placeholder="Username" />
-          <input type="number" placeholder="Quantia" />
-          <button>Transferir</button>
+          <h3>Informe o nome do usuário para quem deseja transferir e a quantia</h3>
+          <input
+            type="text"
+            placeholder="Username"
+            name="userToTransfer"
+            onChange={ this.handleChange }
+          />
+          <input 
+            type="number" 
+            placeholder="Quantia" 
+            name="amountToTransfer"
+            onChange={ this.handleChange }
+          />
+          <button
+            disabled={ checkButtonStatus }
+            onClick={ this.newTransaction }
+          >
+            Transferir
+          </button>
         </div>
-        <button>Log-out</button>
       </main>
     )
   }
