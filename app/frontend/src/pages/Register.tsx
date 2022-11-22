@@ -40,7 +40,7 @@ class Register extends React.Component<any, any> {
     }
   }
 
-  render() {
+  render(): React.ReactNode {
     const checkButtonStatus = this.buttonStatus();
     const { username, password, responseMessage } = this.state;
     return(
