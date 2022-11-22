@@ -46,16 +46,13 @@ export default class Table extends React.Component<any, any> {
   }
 
   filterByType = (type: string) => {
-    const { transactionsFilter } = this.state;
     const { userId, transactions } = this.props;
     if(type === 'cashIn') {
-      const filtered = (transactionsFilter.length > 0 ? transactionsFilter : transactions)
-        .filter((item: ITransaction) => item.creditedAccountId === userId);
+      const filtered = transactions.filter((item: ITransaction) => item.creditedAccountId === userId);
       this.setState({ transactionsFilter: filtered });
     } 
     if (type === 'cashOut') {
-      const filtered = (transactionsFilter.length > 0 ? transactionsFilter : transactions)
-        .filter((item: ITransaction) => item.debitedAccountId === userId);
+      const filtered = transactions.filter((item: ITransaction) => item.debitedAccountId === userId);
       this.setState({ transactionsFilter: filtered });
     }
     if (type === 'all') {
