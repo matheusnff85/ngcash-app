@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { ILogin } from '../interfaces/loginInterface';
 import styled from '../css/login.module.css';
 
