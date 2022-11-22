@@ -12,7 +12,7 @@
 
 # Como utilizar a aplicação
 
-## Importante
+## Importante :warning:
 
 - A Aplicação utiliza as portas **3000**(frontend), **3001**(backend), **3002**(database), para garantir melhor funcionamento da mesma garanta que as 3 portas citadas anteriormente estão disponíveis para serem utilizadas, caso precise utilizar outra porta, altere as mesmas manualmente no arquivo `docker-compose.yml` localizado na pasta `/app`, assim como suas variáveis de ambiente caso seja necessário mudar algo, (Caso deseje rodá-la sem o docker será necessário alterar as portas ou as variáveis manualmente nos repositórios de frontend e backend).
 
