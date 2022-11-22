@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { ILogin } from '../interfaces/loginInterface';
+import styled from '../css/login.module.css';
 
 
 class Login extends React.Component<any, any> {
@@ -39,34 +40,38 @@ class Login extends React.Component<any, any> {
   render(): React.ReactNode {
     const { username, password, loginErrorMsg } = this.state;
     return (
-      <main>
-        <h2>NG.CASH</h2>
-        <p>O app financeiro da <strong>N</strong>ova <strong>G</strong>eração!</p>
-        <input
-          type="text"
-          name="username"
-          placeholder="usuário"
-          value={ username }
-          onChange={ this.handleChange }
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="senha"
-          value={ password }
-          onChange={ this.handleChange }
-        />
-        <button 
-          onClick={ () => this.login({ username, password }) } 
-        >
-          Login
-        </button>
-        <h4>Não possui conta?</h4>
-        <Link to="/register" >
-          <button>Criar Conta</button>
-        </Link>
-
-        { loginErrorMsg && <h2>{ loginErrorMsg }</h2>}
+      <main className={ styled.loginMainContainer } >
+        <div className={ styled.loginHeader } >
+          <h2 className={ styled.loginMainTitle } >NG.CASH</h2>
+          <p className={ styled.loginSubTitle } >O app financeiro da <strong>N</strong>ova <strong>G</strong>eração!</p>
+        </div>
+        <div className={ styled.loginInputs }>
+          <input
+            type="text"
+            name="username"
+            placeholder="usuário"
+            value={ username }
+            onChange={ this.handleChange }
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="senha"
+            value={ password }
+            onChange={ this.handleChange }
+          />
+          <button 
+            onClick={ () => this.login({ username, password }) }
+            className={ styled.loginBtn }
+          >
+            Login
+          </button>
+        </div>
+        { loginErrorMsg && <h2 className={ styled.loginErrorMsg } >{ loginErrorMsg }</h2>}
+        <div className={ styled.loginRegisterDiv } >        
+          <h4>Não possui conta?</h4>
+          <button onClick={ () => window.location.replace('/register') } >Criar Conta</button>
+        </div>
       </main>
     );
   }
