@@ -1,13 +1,14 @@
 .loginMainContainer {
   align-items: center;
   background-color: var(--main-white);
+  box-shadow: 1px 0px 0.5rem var(--main-black);
   display: flex;
   flex-flow: nowrap column;
   height: 100vh;
   justify-content: space-evenly;
   margin: auto;
   text-align: center;
-  width: 50vw;
+  width: 60vw;
 }
 
 .loginHeader {
@@ -40,11 +41,11 @@
 	border: none;
 	border-radius: 10px;
   color: var(--main-black);
-	height: 2rem;
+	height: 3rem;
 	margin: 6px auto;
 	outline: none;
 	padding: 20px;
-	width: 260px;
+	width: 280px;
 }
 
 .loginBtn {

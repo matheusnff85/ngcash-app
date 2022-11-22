@@ -1,19 +1,21 @@
 .registerMainContainer {
   align-items: center;
   background-color: var(--main-white);
+  box-shadow: 1px 0px 0.5rem var(--main-black);
   display: flex;
   flex-flow: nowrap column;
   height: 100vh;
-  justify-content: space-evenly;
+  justify-content: center;
   margin: auto;
   text-align: center;
-  width: 50vw;
+  width: 60vw;
 }
 
 .registerHeader {
   display: flex;
   flex-flow: nowrap column;
   justify-content: center;
+  margin-bottom: 90px;
 }
 
 .registerMainTitle {
@@ -82,7 +84,17 @@
   font-weight: bold;
 }
 
+.registerPassReqs {
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: center;
+}
+
 .registerPassReqs p, li {
   font-family: 'Roboto Slab';
   font-size: 1rem;
+}
+
+.registerPassReqs li {
+  text-align: start;
 }

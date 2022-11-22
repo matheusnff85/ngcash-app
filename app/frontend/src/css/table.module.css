@@ -1,0 +1,92 @@
+.tableFilters {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.selectFilter {
+    background-color: #e0dede;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: none;
+    color: var(--main-black);
+    cursor: pointer;
+    height: 2em;
+    margin-right: 10px;
+    outline: 0;
+    text-align: center;
+    width: 130px;
+}
+
+.selectFilter:hover {
+  background-color: #c9c0c0;
+}
+
+.tableFilters button {
+  background: var(--main-green);
+  border: none;
+	border-radius: 8px;
+	color: var(--main-white);
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1.15em;
+	font-weight: bold;
+  height: 30px;
+	justify-content: center;
+  margin: auto 5px;
+	outline: none;
+	transition: .2s ease-in;
+  width: 130px;
+}
+
+.tableFilters button:hover {
+  background: #03805c;
+}
+
+.dateFilter {
+  height: 30px;
+  font-family: 'Roboto Slab';
+  margin-left: 10px;
+  width: 140px;
+}
+
+.mainTable {
+  background-color: var(--main-white);
+  border-collapse: collapse;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-family: 'Roboto Slab';
+  font-weight: normal;
+  margin-top: 20px;
+  max-width: 100%;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.mainTable td, .mainTable th {
+  text-align: center;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.mainTable td {
+  border-right: 1px solid #f8f8f8;
+  font-size: 0.9rem;
+}
+
+.mainTable thead th {
+  color: var(--main-white);
+  background: var(--main-green);
+}
+
+.mainTable thead th:nth-child(odd) {
+  color: var(--main-white);
+  background: #324960;
+}
+
+.mainTable tbody tr:nth-child(even) {
+  color: var(--main-white);
+  background: var(--main-gray);
+}
