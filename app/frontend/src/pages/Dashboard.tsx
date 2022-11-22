@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { IUserLoginInfos } from '../interfaces/loginInterface';
 import Table from '../components/table';
+import styled from '../css/dashboard.module.css';
 
 class Dashboard extends React.Component<any, any> {
   constructor(props: any) {
@@ -15,6 +16,7 @@ class Dashboard extends React.Component<any, any> {
       userTransactions: [],
       userToTransfer: '',
       amountToTransfer: '',
+      dashboardErrorMsg: '',
     }
   }
 
@@ -59,7 +61,9 @@ class Dashboard extends React.Component<any, any> {
       headers: { Authorization: token },
       params: { username } })
       .then((res) => res.data)
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        this.setState({ dashboardErrorMsg: err.response.data.message });
+      });
     return result.id;
   }
 
@@ -77,13 +81,15 @@ class Dashboard extends React.Component<any, any> {
     const transactionObj = {
       debitedAccountId: userId,
       creditedAccountId: getUserId,
-      value: Number(amountToTransfer),
+      value: Number(amountToTransfer).toFixed(2),
       createdAt: new Date().toISOString(),
     };
     const newTransaction = await axios.post('http://localhost:3001/transaction', transactionObj, {
       headers: { Authorization: token } })
       .then((res) => res.data)
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        this.setState({ dashboardErrorMsg: err.response.data.message });
+      });
     if (newTransaction) {
       this.setState({ 
         userBalance: userBalance - Number(amountToTransfer),
@@ -102,25 +108,34 @@ class Dashboard extends React.Component<any, any> {
 
   render(): React.ReactNode {
     const checkButtonStatus = this.payButtonStatus();
-    const { username, userBalance, userTransactions, userId, userToTransfer, amountToTransfer } = this.state;
+    const { 
+      username,
+      userBalance,
+      userTransactions,
+      userId,
+      userToTransfer,
+      amountToTransfer,
+      dashboardErrorMsg,
+      } = this.state;
     return(
-      <main>
-        <header>
+      <main className={ styled.dashboardMainContainer } >
+        <header className={ styled.dashboardHeader } >
           <div>
-            <h2>NG.CASH</h2>
+            <h2 className={ styled.dashboardMainTitle } >NG.CASH</h2>
           </div>
-          <div>
-            <h3>{ username }</h3>
-            <h3>{ userBalance }</h3>
+          <div className={ styled.headerUserDiv }>
+            <h3 className={ styled.dashboardUsername } >{ username }</h3>
+            <h3 className={ styled.dashboardUserBalance } >{ `R$: ${userBalance}` }</h3>
             <button
               onClick={ this.logOut }
+              className={ styled.dashboardLogoutBtn }
             >
               Log-out
             </button>
           </div>
         </header>
-        <div>
-          <h3>Informe o nome do usuário para quem deseja transferir e a quantia</h3>
+        <div className={ styled.transactionContainer } >
+          <h3 className={ styled.transactionTitle } >Informe o nome do usuário para quem deseja transferir e a quantia</h3>
           <input
             type="text"
             placeholder="Username"
@@ -138,9 +153,11 @@ class Dashboard extends React.Component<any, any> {
           <button
             disabled={ checkButtonStatus }
             onClick={ this.newTransaction }
+            className={ styled.transactionBtn }
           >
             Transferir
           </button>
+          { dashboardErrorMsg && <h2 className={ styled.dashboardErrorMsg } >{ dashboardErrorMsg }</h2>}
         </div>
         <Table
           transactions={ userTransactions }

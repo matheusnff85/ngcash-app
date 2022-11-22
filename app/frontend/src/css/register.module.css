@@ -1,111 +1,100 @@
-.loginMainContainer {
+.registerMainContainer {
   align-items: center;
   background-color: var(--main-white);
   box-shadow: 1px 0px 0.5rem var(--main-black);
   display: flex;
   flex-flow: nowrap column;
   height: 100vh;
-  justify-content: space-evenly;
+  justify-content: center;
   margin: auto;
   text-align: center;
   width: 60vw;
 }
 
-.loginHeader {
+.registerHeader {
   display: flex;
   flex-flow: nowrap column;
   justify-content: center;
+  margin-bottom: 90px;
 }
 
-.loginMainTitle {
+.registerMainTitle {
   font-family: 'Roboto Slab';
   font-size: 4.8rem;
 }
 
-.loginSubTitle {
+.registerSubTitle {
   font-size: 1.2rem;
   color: var(--main-black);
 }
 
-.loginSubTitle strong {
+.registerSubTitle strong {
   color: var(--main-green);
 }
 
-.loginInputs {
+.registerInputs {
   display: flex;
   flex-flow: nowrap column;
 }
 
-.loginInputs input {
+.registerInputs input {
 	background: #e0dede;
 	border: none;
 	border-radius: 10px;
   color: var(--main-black);
 	height: 3rem;
-	margin: 6px auto;
+	margin: 12px auto;
 	outline: none;
 	padding: 20px;
 	width: 280px;
 }
 
-.loginBtn {
+.registerBtn {
   background: var(--main-purple);
   border: none;
 	border-radius: 8px;
 	color: var(--main-white);
-	cursor: pointer;
+  cursor: pointer;
 	display: block;
 	font-size: 1.3em;
 	font-weight: bold;
-  height: 35px;
+  height: 40px;
 	justify-content: center;
 	margin: 5px auto;
 	margin-top: 15px;
 	outline: none;
 	transition: .2s ease-in;
-  width: 170px;
+  width: 200px;
 }
 
-.loginBtn:hover {
+.registerBtn:hover {
   background: #5f3aa3;
 }
 
-.loginErrorMsg {
+
+.registerBtn:disabled {
+  background: var(--main-gray);
+  cursor: default;
+}
+
+.registerErrorMsg {
   color: var(--main-red);
   font-size: 1.5em;
   font-family: 'Roboto Slab';
   font-weight: bold;
 }
 
-.loginRegisterDiv {
-  align-items: center;
+.registerPassReqs {
   display: flex;
-  flex-flow: nowrap row;
+  flex-flow: nowrap column;
+  align-items: center;
 }
 
-.loginRegisterDiv h4 {
+.registerPassReqs p, li {
   font-family: 'Roboto Slab';
-  font-size: 1.3rem;
-  margin-right: 15px;
+  font-size: 1rem;
 }
 
-.loginRegisterDiv button {
-  background: var(--main-green);
-  border: none;
-	border-radius: 8px;
-	color: var(--main-white);
-	cursor: pointer;
-	display: block;
-	font-size: 1.3em;
-	font-weight: bold;
-  height: 35px;
-	justify-content: center;
-	margin: 5px auto;
-	outline: none;
-	transition: .2s ease-in;
-  width: 160px;
-}
-
-.loginRegisterDiv button:hover {
-  background: #069b71;
+.registerPassReqs li {
+  text-align: start;
 }

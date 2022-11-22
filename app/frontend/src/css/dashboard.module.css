@@ -1,0 +1,122 @@
+.dashboardMainContainer {
+  align-items: center;
+  background-color: var(--main-white);
+  box-shadow: 1px 0px 0.5rem var(--main-black);
+  display: flex;
+  flex-flow: nowrap column;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+  width: 69vw;
+}
+
+.dashboardHeader {
+  align-items: center;
+  background-attachment: fixed;
+  background-color: var(--main-black);
+  background-image: url('../images/background.png');
+  background-position-x: -400px;
+  background-position-y: -523px;
+  background-repeat: no-repeat;
+  border: transparent;
+  box-shadow: 0px 0.5px 0.4rem var(--main-green);
+  display: flex;
+  flex-flow: row wrap;
+  height: 12.5vh;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 69vw;
+}
+
+.headerUserDiv {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.dashboardMainTitle {
+  color: var(--main-white);
+  -webkit-text-stroke-width: 2.2px;
+  -webkit-text-stroke-color: var(--main-black);
+  font-family: 'Roboto Slab';
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-left: 40px;
+}
+
+.dashboardUsername {
+  color: var(--main-white);
+  -webkit-text-stroke-width: 0.6px;
+  -webkit-text-stroke-color: var(--main-black);
+  font-family: 'Roboto Slab';
+  font-size: 1.6rem;
+  margin-right: 25px;
+}
+
+.dashboardUserBalance {
+  color: var(--main-white);
+  -webkit-text-stroke-width: 0.6px;
+  -webkit-text-stroke-color: var(--main-black);
+  font-family: 'Roboto Slab';
+  font-size: 1.6rem;
+  margin-right: 20px;
+}
+
+.dashboardLogoutBtn {
+  background: var(--main-red);
+  border: none;
+	border-radius: 8px;
+	color: var(--main-white);
+	cursor: pointer;
+	display: block;
+	font-size: 1.3em;
+	font-weight: bold;
+  height: 35px;
+	margin: 5px auto;
+  margin-right: 15px;
+	outline: none;
+	transition: .2s ease-in;
+  width: 145px;
+}
+
+.transactionContainer input {
+  background: #f3eaea;
+	border: none;
+	border-radius: 10px;
+  color: var(--main-black);
+	height: 1.8rem;
+	margin: 12px auto;
+  margin-right: 10px;
+	outline: none;
+	padding: 20px;
+	width: 220px;
+}
+
+.transactionBtn {
+  background: var(--main-green);
+  border: none;
+	border-radius: 8px;
+	color: var(--main-white);
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1.3em;
+	font-weight: bold;
+  height: 35px;
+	justify-content: center;
+	margin: 5px auto;
+	outline: none;
+	transition: .2s ease-in;
+  width: 160px;
+}
+
+.transactionBtn:hover {
+  background: #037c5a;
+}
+
+.transactionTitle {
+  font-family: 'Roboto Slab';
+  font-size: 1.2rem;
+}

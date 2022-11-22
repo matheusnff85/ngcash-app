@@ -1,5 +1,6 @@
 import React from 'react';
 import { ITransaction } from '../interfaces/transactionInterface';
+import styled from '../css/table.module.css';
 
 export default class Table extends React.Component<any, any> {
   constructor(props: any) {
@@ -64,12 +65,13 @@ export default class Table extends React.Component<any, any> {
     const { transactionsFilter } = this.state;
     const { transactions, userId } = this.props;
     return (
-      <div>
-        <div>
+      <div className={ styled.tableMainContainer } >
+        <div className={ styled.tableFilters } >
           <select 
             name="transactionType" 
             id="transactionType" 
             onChange={ ({ target }) => this.filterByType(target.value)}
+            className={ styled.selectFilter }
           >
             <option value="all" defaultChecked >Todas</option>
             <option value="cashIn" >Cash-In</option>
@@ -77,9 +79,14 @@ export default class Table extends React.Component<any, any> {
           </select>
           <button onClick={ () => this.orderByReleaseDate('DSC') }>Recentes</button>
           <button onClick={ () => this.orderByReleaseDate('ASC') }>Antigas</button>
-          <input type="date" name="filterDate" id="filterDate" onChange={ ({ target }) => this.filterByDate(target.value) } />
+          <input
+            type="date"
+            name="filterDate"
+            className={ styled.dateFilter }
+            onChange={ ({ target }) => this.filterByDate(target.value) }
+          />
         </div>
-        <table>
+        <table className={ styled.mainTable } >
           <thead>
             <tr>
               <th>Id</th>
