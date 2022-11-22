@@ -1,10 +1,10 @@
-# Web wallet NG.CASH
+# Web wallet NG.CASH :money_mouth_face:
 
 - Neste repositório contém a aplicação pedida no processo seletivo da NG.CASH um app financeiro da **N**ova **G**eração!, consiste em uma aplicação web fullstack, dockerizada cujo o objetivo é possibilitar os usuários da NG a realizarem transferências entre si.
 
 ---
 
-# Tecnologias Utilizadas
+# Tecnologias Utilizadas :books:
 
 - Typescript, Node.js, Docker, Sequelize, PostgreSQL, React, Express, Joi, CSS.
 
@@ -30,7 +30,7 @@
 </details>
 
 <details>
-  <summary><strong>Rodando manualmente</strong></summary><br>
+  <summary><strong>Rodando manualmente :wrench:</strong></summary><br>
 
   - Primeiro clone o repositório com o comando `git clone git@github.com:matheusnff85/ngcash-app.git` e após clonar instale suas dependências com o comando `npm install` na raiz do projeto.
 
