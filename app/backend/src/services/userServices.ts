@@ -20,6 +20,12 @@ export default class UserServices {
     return result;
   }
 
+  public async findByUsername(username: string): Promise<IUser> {
+    const result = await this.usersModel.findByUsername(username);
+    if (!result) throw new CustomError(StatusCodes.NOT_FOUND, 'User not found');
+    return result;
+  }
+
   public async login(loginObj: IUser): Promise<ILogin> {
     const { username, password } = loginObj;
     const result = await this.usersModel.findByUsername(username);

@@ -17,6 +17,11 @@ export default class UserController {
 
   public findOne: RequestHandler = async (req, res, next) => {
     try {
+      const { username } = req.query;
+      if (username) {
+        const result = await this.userServices.findByUsername(username as string);
+        return res.status(StatusCodes.OK).json(result);
+      }
       const result = await this.userServices.findOne(req.params.id);
       return res.status(StatusCodes.OK).json(result);
     } catch (error) {
